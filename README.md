@@ -3,7 +3,7 @@ This is the solution for TD1 on services, a quick tutorial on how to implement a
 
 This TD implements two dummy services: solodated.service and continuousdated.service
 
-#Install
+# Install
 
 To install these services, type the following commands in a terminal:
 
@@ -32,7 +32,7 @@ It is also possible to check he service status:
 sudo systemtcl status solodated.service
 ```
 
-#continuousdated
+# continuousdated
 
 This service write date on a file situated at /var/log/continuousdated/continuousdate.out every 2 seconds
 
