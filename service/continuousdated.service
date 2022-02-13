@@ -1,0 +1,11 @@
+[Unit]
+Description=Write date on file every 2s
+After=network-online.target
+
+[Service]
+Type=simple
+ExecStart=/bin/continuousdate.sh
+
+[Install]
+WantedBy=multi-user.target
+

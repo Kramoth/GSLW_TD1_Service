@@ -1,0 +1,11 @@
+[Unit]
+Description=simple service that write date on file on boot
+After=network-online.target
+
+[Service]
+Type=oneshot
+RemainAfterExit=yes
+ExecStart=/bin/solodate.sh
+
+[Install]
+WantedBy=multi-user.target
