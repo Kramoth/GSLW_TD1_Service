@@ -19,7 +19,7 @@ fi
 #copy script if not exists
 if [ ! -f /bin/$script_name ]
 then
-	cp $2/src/$script_name /bin/
+	sudo cp $2/src/$script_name /bin/
 else
 	echo "$script_name already exists, please check"
 fi
