@@ -1,15 +1,47 @@
 #!/bin/bash
 
+install_service()
+{
+#get service name
+service_name=$(echo "$1" | cut -d "." -f 1)
+#get script name
+script_name="${service_name::-1}.sh"
+
+#copy service file if not exists
+if [ ! -f /etc/systemd/system/service_name ]
+then
+	sudo cp $2/service/$1 /etc/systemd/system/
+else
+	echo "$service_name file already exist, please check" 2> /home/client/install_log.txt
+fi
+
+
+#copy script if not exists
+if [ ! -f /bin/$script_name ]
+then
+	cp $2/src/$script_name /bin/
+else
+	echo "$script_name already exists, please check"
+fi
+
+#create log folder if not exists
+if [ ! -d /var/log/$service_name ]
+then
+	sudo mkdir /var/log/$service_name
+else
+	echo "log folder already exists"
+fi
+
+#activating the service
+sudo systemctl enable $1
+#start the service
+sudo systemctl start $1
+
+}
+
+
 INSTALL_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
 
-sudo cp $INSTALL_DIR/service/* /etc/systemd/system/
-sudo cp $INSTALL_DIR/src/* /bin/
 
-sudo mkdir /var/log/solodated
-sudo mkdir /var/log/continuousdated
-
-sudo systemctl enable solodated.service
-sudo systemctl start solodated.service
-
-sudo systemctl enable continuousdated.service
-sudo systemctl start continuousdated.service
+install_service solodated.service $INSTALL_DIR
+install_service continuousdated.service $INSTALL_DIR
