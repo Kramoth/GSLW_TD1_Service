@@ -8,11 +8,11 @@ service_name=$(echo "$1" | cut -d "." -f 1)
 script_name="${service_name::-1}.sh"
 
 #copy service file if not exists
-if [ ! -f /etc/systemd/system/service_name ]
+if [ ! -f /etc/systemd/system/$service_name ]
 then
 	sudo cp $2/service/$1 /etc/systemd/system/
 else
-	echo "$service_name file already exist, please check" 2> /home/client/install_log.txt
+	echo "$service_name file already exist, please check"
 fi
 
 
